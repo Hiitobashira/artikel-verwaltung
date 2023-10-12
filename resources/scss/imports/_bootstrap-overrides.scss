@@ -1,0 +1,79 @@
+.table-dark {
+    --bs-table-color: #{$bodyColor};
+    --bs-table-striped-color: #{$bodyColor};
+}
+
+.navbar-dark,
+.navbar[data-bs-theme=dark] {
+    --bs-navbar-color: #{$white};
+    --bs-navbar-active-color: #{$bodyColor};
+    --bs-navbar-hover-color: #{$bodyColor};
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #{$bodyColor};
+    --bs-btn-border-color: #{$bodyColor};
+    --bs-btn-hover-color: #{$black};
+    --bs-btn-hover-bg: #{$bodyColor};
+    --bs-btn-hover-border-color: #{$bodyColor};
+    --bs-btn-active-color: #{$black};
+    --bs-btn-active-bg: #{$bodyColor};
+    --bs-btn-active-border-color: #{$bodyColor};
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: #{$bodyColor};
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #{$bodyColor};
+    --bs-gradient: none;
+}
+
+.btn-primary {
+    --bs-btn-color: #{$black};
+    --bs-btn-bg: #{$bodyColor};
+    --bs-btn-border-color: #{$bodyColor};
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #{darken($bodyColor, 10%)};
+    --bs-btn-hover-border-color: #{darken($bodyColor, 10%)};
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #{darken($bodyColor, 10%)};
+    --bs-btn-active-border-color: #{darken($bodyColor, 10%)};
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #{darken($bodyColor, 80%)};
+    --bs-btn-disabled-border-color: #{darken($bodyColor, 80%)};
+}
+
+.form-text {
+    color: $bodyColor;
+}
+
+.form-control {
+    background-color: transparent;
+    border-color: $bodyColor;
+    color: $bodyColor;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    border-color: $bodyColor;
+    color: $bodyColor;
+    box-shadow: none;
+}
+
+.form-floating > label {
+    color: $white;
+}
+
+.form-floating > .form-control-plaintext~label,
+.form-floating > .form-control:focus~label,
+.form-floating > .form-control:not(:placeholder-shown)~label,
+.form-floating > .form-select~label {
+    color: $bodyColor;
+}
+
+.form-floating > .form-control-plaintext~label::after,
+.form-floating > .form-control:focus~label::after,
+.form-floating > .form-control:not(:placeholder-shown)~label::after,
+.form-floating > .form-select~label::after {
+    background: transparent;
+}

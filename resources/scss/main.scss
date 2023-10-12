@@ -1,0 +1,8 @@
+// Import all necessary variables
+@import './imports/variables';
+
+// Override any bootstrap styles if necessary
+@import './imports/bootstrap-overrides';
+
+// Define default layout
+@import './imports/layout';

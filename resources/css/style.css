@@ -1,0 +1,84 @@
+.table-dark {
+  --bs-table-color: #aad4e5;
+  --bs-table-striped-color: #aad4e5; }
+
+.navbar-dark,
+.navbar[data-bs-theme=dark] {
+  --bs-navbar-color: #fff;
+  --bs-navbar-active-color: #aad4e5;
+  --bs-navbar-hover-color: #aad4e5; }
+
+.btn-outline-primary {
+  --bs-btn-color: #aad4e5;
+  --bs-btn-border-color: #aad4e5;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #aad4e5;
+  --bs-btn-hover-border-color: #aad4e5;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #aad4e5;
+  --bs-btn-active-border-color: #aad4e5;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: #aad4e5;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #aad4e5;
+  --bs-gradient: none; }
+
+.btn-primary {
+  --bs-btn-color: #000;
+  --bs-btn-bg: #aad4e5;
+  --bs-btn-border-color: #aad4e5;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #83c0d9;
+  --bs-btn-hover-border-color: #83c0d9;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #83c0d9;
+  --bs-btn-active-border-color: #83c0d9;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: black;
+  --bs-btn-disabled-border-color: black; }
+
+.form-text {
+  color: #aad4e5; }
+
+.form-control {
+  background-color: transparent;
+  border-color: #aad4e5;
+  color: #aad4e5; }
+
+.form-control:focus {
+  background-color: transparent;
+  border-color: #aad4e5;
+  color: #aad4e5;
+  box-shadow: none; }
+
+.form-floating > label {
+  color: #fff; }
+
+.form-floating > .form-control-plaintext ~ label,
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label,
+.form-floating > .form-select ~ label {
+  color: #aad4e5; }
+
+.form-floating > .form-control-plaintext ~ label::after,
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+.form-floating > .form-select ~ label::after {
+  background: transparent; }
+
+:root {
+  --bs-primary-rgb: 170, 212, 229; }
+
+body {
+  background: #0c0c0e;
+  color: #aad4e5; }
+
+table th,
+table td {
+  vertical-align: middle; }
+
+#echarts {
+  width: 100%;
+  height: 500px; }
