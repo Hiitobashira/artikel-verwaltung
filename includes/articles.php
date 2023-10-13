@@ -120,7 +120,7 @@ class oArticle
             $oQuery = $this->oConnection->prepare($sQuery);
             $oQuery->bindValue(':article_name', $aPostData['article_name'], \PDO::PARAM_STR);
             $oQuery->bindValue(':article_number', $aPostData['article_number'], \PDO::PARAM_STR);
-            $oQuery->bindValue(':article_price', $aPostData['article_price'], \PDO::PARAM_INT);
+            $oQuery->bindValue(':article_price', $aPostData['article_price'], \PDO::PARAM_STR);
 
             if ($aPostData['id']) {
                 $oQuery->bindValue(':id', $aPostData['id'], \PDO::PARAM_INT);
