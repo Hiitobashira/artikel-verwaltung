@@ -30,7 +30,6 @@ class oDB extends \Config\oConfig
      */
     public function vConnect()
     {
-        // $this->oConnection = new PDO("mysql:host=localhost; dbname=artikelverwaltung; charset=utf8" , 'artikelverwaltung' , '6bzhEILvOOTC-7R@');
         $this->oConnection = new \PDO("mysql:host=" . $this->sGetAttribute('sDBHost') . "; dbname=" . $this->sGetAttribute('sDBName') . "; charset=utf8", $this->sGetAttribute('sUserName'), $this->sGetAttribute('sPassword'));
     }
 
