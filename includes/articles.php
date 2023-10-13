@@ -29,20 +29,40 @@ class oArticle
     }
 
     /**
-     * Get an article by article number
+     * Get an article by id
      * 
-     * @param int $iArticleNumber
+     * @param int $iID
      * 
      * @return object
      */
-    public function oFindByArticleNumber($iArticleNumber)
+    public function oFindById(int $iID)
     {
-        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE article_number = ' . $iArticleNumber;
-        $oArticle = $this->oConnection->query($sQuery)->fetchObject();
-        if (!$oArticle) {
+        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE id = ?';
+        $oQuery = $this->oConnection->prepare($sQuery);
+        $oQuery->bindValue(1, $iID, \PDO::PARAM_INT);
+        if (!$oQuery->execute()) {
             return false;
         }
-        return $oArticle;
+        return $oQuery->fetchObject();
+    }
+
+    /**
+     * Get an article by article number
+     * 
+     * @param string $sArticleNumber
+     * 
+     * @return object
+     */
+    public function oFindByArticleNumber(string $sArticleNumber)
+    {
+        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE article_number = ?';
+        $oQuery = $this->oConnection->prepare($sQuery);
+        $oQuery->bindValue(1, $sArticleNumber, \PDO::PARAM_STR);
+
+        if (!$oQuery->execute()) {
+            return false;
+        }
+        return $oQuery->fetchObject();
     }
 
     /**
@@ -52,11 +72,19 @@ class oArticle
      * 
      * @return array
      */
-    public function aGetArticlesByTerm($sTerm)
+    public function aGetArticlesByTerm(string $sTerm)
     {
-        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE article_name LIKE "%' . $sTerm . '%" OR article_number LIKE "%' . $sTerm . '%"';
+        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE article_name LIKE :sTerm OR article_number LIKE :sTerm';
+        $oQuery = $this->oConnection->prepare($sQuery);
+        $oQuery->bindValue(':sTerm', "%{$sTerm}%", \PDO::PARAM_STR);
 
-        return $this->oConnection->query($sQuery)->fetchAll();
+        $bResult = $oQuery->execute();
+
+        if ($bResult) {
+            return $oQuery->fetchAll();
+        }
+
+        return [];
     }
 
     /**
@@ -66,11 +94,20 @@ class oArticle
      * 
      * @return object
      */
-    public function oGetArticleById($iID)
+    public function oGetArticleById(int $iID)
     {
-        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE id = ' . $iID;
+        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE id = ?';
 
-        return $this->oConnection->query($sQuery)->fetchObject();
+        $oQuery = $this->oConnection->prepare($sQuery);
+        $oQuery->bindValue(1, $iID, \PDO::PARAM_INT);
+
+        $bResult = $oQuery->execute();
+
+        if ($bResult) {
+            return $oQuery->fetchObject();
+        }
+
+        return null;
     }
 
     /**
@@ -97,7 +134,21 @@ class oArticle
             if ($oArticle && $oArticle->id != $aPostData['id']) {
                 throw new \Exception('Artikel mit der Artikelnummer ' . $aPostData['article_number'] . ' existiert bereits.');
             }
-            $this->oConnection->prepare($sQuery)->execute($aPostData);
+
+            $oQuery = $this->oConnection->prepare($sQuery);
+            $oQuery->bindValue(':article_name', $aPostData['article_name'], \PDO::PARAM_STR);
+            $oQuery->bindValue(':article_number', $aPostData['article_number'], \PDO::PARAM_STR);
+            $oQuery->bindValue(':article_price', $aPostData['article_price'], \PDO::PARAM_INT);
+
+            if ($aPostData['id']) {
+                $oQuery->bindValue(':id', $aPostData['id'], \PDO::PARAM_INT);
+            }
+
+            $bResult = $oQuery->execute();
+
+            if (!$bResult) {
+                throw new \Exception('Bei der Ausführung ist ein Fehler aufgetreten.');
+            }
             $this->oConnection->commit();
         } catch (\Exception $oException) {
             $this->oConnection->rollBack();
@@ -118,16 +169,30 @@ class oArticle
      */
     public function bDeleteArticle($aPostData)
     {
-        $sQuery = 'DELETE FROM ' . $this->sTableName . ' WHERE id = ' . $aPostData['id'];
+
+        $oArticle = $this->oFindById($aPostData['id']);
+        if ($oArticle && $oArticle->id != $aPostData['id']) {
+            $_SESSION['sMessage'] = 'Artikel mit der ID ' . $aPostData['id'] . ' existiert nicht.';
+            return false;
+        }
+
         
         try {
+            $sQuery = 'DELETE FROM ' . $this->sTableName . ' WHERE id = :id';
             $this->oConnection->beginTransaction();
-            $this->oConnection->query($sQuery)->execute();
+            $oQuery = $this->oConnection->prepare($sQuery);
+            $oQuery->bindValue(':id', $aPostData['id'], \PDO::PARAM_INT);
+
+            $bResult = $oQuery->execute();
+
+            if (!$bResult) {
+                throw new \Exception('Bei der Ausführung ist ein Fehler aufgetreten.');
+            }
+
             $this->oConnection->commit();
         } catch (\Exception $oException) {
             $this->oConnection->rollBack();
             $_SESSION['sMessage'] = $oException->getMessage();
-
             return false;
         }
 
