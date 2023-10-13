@@ -29,24 +29,6 @@ class oArticle
     }
 
     /**
-     * Get an article by id
-     * 
-     * @param int $iID
-     * 
-     * @return object
-     */
-    public function oFindById(int $iID)
-    {
-        $sQuery = 'SELECT * FROM ' . $this->sTableName . ' WHERE id = ?';
-        $oQuery = $this->oConnection->prepare($sQuery);
-        $oQuery->bindValue(1, $iID, \PDO::PARAM_INT);
-        if (!$oQuery->execute()) {
-            return false;
-        }
-        return $oQuery->fetchObject();
-    }
-
-    /**
      * Get an article by article number
      * 
      * @param string $sArticleNumber
@@ -170,7 +152,7 @@ class oArticle
     public function bDeleteArticle($aPostData)
     {
 
-        $oArticle = $this->oFindById($aPostData['id']);
+        $oArticle = $this->oGetArticleById($aPostData['id']);
         if ($oArticle && $oArticle->id != $aPostData['id']) {
             $_SESSION['sMessage'] = 'Artikel mit der ID ' . $aPostData['id'] . ' existiert nicht.';
             return false;
