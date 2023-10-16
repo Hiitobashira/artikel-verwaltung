@@ -51,5 +51,9 @@ class oConfig
         } else {
             $this->sPassword = $aConfig['DBPASSWD'];
         }
+
+        if (!$this->sDBHost || !$this->sDBName || !$this->sUserName || !$this->sPassword) {
+            exit('Die Konfigurationsdatei ist fehlerhaft.');
+        }
     }
 }
