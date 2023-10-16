@@ -188,5 +188,3 @@ class oArticle
         return $this->oConnection->query($sQuery)->fetchAll();
     }
 }
-
-?>
