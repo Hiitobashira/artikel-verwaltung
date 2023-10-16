@@ -24,4 +24,32 @@ class oConfig
         
         return null;
     }
+
+    protected function vSetCredentials()
+    {
+        $aConfig = parse_ini_file(__DIR__ . '/../config.ini');
+        if (getenv("DBHOST") !== FALSE) {
+            $this->sDBHost = getenv("DBHOST");
+        } else {
+            $this->sDBHost = $aConfig['DBHOST'];
+        }
+
+        if (getenv("DBNAME") !== FALSE) {
+            $this->sDBName = getenv("DBNAME");
+        } else {
+            $this->sDBName = $aConfig['DBNAME'];
+        }
+
+        if (getenv("DBUSER") !== FALSE) {
+            $this->sUserName = getenv("DBUSER");
+        } else {
+            $this->sUserName = $aConfig['DBUSER'];
+        }
+
+        if (getenv("DBPASSWD") !== FALSE) {
+            $this->sPassword = getenv("DBPASSWD");
+        } else {
+            $this->sPassword = $aConfig['DBPASSWD'];
+        }
+    }
 }
