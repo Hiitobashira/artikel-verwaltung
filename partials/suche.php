@@ -1,15 +1,17 @@
 <?php
 include_once('includes/articles.php');
 
+$sBegriff = strip_tags($_GET['begriff']);
+
 // Instantiate the Article class and get all available articles
 $oArticle = new \Article\oArticle();
-$aArticles = $oArticle->aGetArticlesByTerm($_GET['begriff']);
+$aArticles = $oArticle->aGetArticlesByTerm($sBegriff);
 ?>
 
 <?php if (count($aArticles)) : ?>
     <div class="col-12">
         <div class="text-primary text-center mb-5">
-            Zu dem Begriff <strong>"<?php echo $_GET['begriff'] ?>"</strong> wurden <?php echo count($aArticles) ?> Ergebnis(se) gefunden.
+            Zu dem Begriff <strong>"<?php echo $sBegriff ?>"</strong> wurden <?php echo count($aArticles) ?> Ergebnis(se) gefunden.
         </div>
         <table class="table table-striped table-dark">
             <thead>
@@ -44,7 +46,7 @@ $aArticles = $oArticle->aGetArticlesByTerm($_GET['begriff']);
 <?php else : ?>
     <div class="col-12 col-md-6 mx-auto text-center">
         <div class="text-danger">
-            Die Suche nach dem Begriff <strong>"<?php echo $_GET['begriff'] ?>"</strong> liefert keine Ergebnisse. Bitte versuchen Sie es mit einem anderen Begriff.
+            Die Suche nach dem Begriff <strong>"<?php echo $sBegriff ?>"</strong> liefert keine Ergebnisse. Bitte versuchen Sie es mit einem anderen Begriff.
         </div>
     </div>
 <?php endif; ?>
