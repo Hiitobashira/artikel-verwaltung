@@ -22,7 +22,8 @@ $aErrorFields = false;
 if (count($aErrorFields)) {
     $_SESSION['aErrorFields'] = $aErrorFields;
     $_SESSION['aPostData'] = $aPostData;
-    return header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 
 switch ($sType) {
@@ -48,10 +49,12 @@ switch ($sType) {
 
 if (!$bSucceed) {
     $_SESSION['aPostData'] = $_POST;
-    return header('Location: ' . $_SERVER['HTTP_REFERER']);
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 
-return header('Location: /');
+header('Location: /');
+exit;
 
 /**
  * Sanitize post data
