@@ -10,6 +10,7 @@ class oDB extends \Config\oConfig
 
     public function __construct ()
     {
+        $this->vSetCredentials();
         $this->vConnect();
     }
 
@@ -44,4 +45,3 @@ class oDB extends \Config\oConfig
         $this->oConnection = null;
     }
 }
-?>
