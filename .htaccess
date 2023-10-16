@@ -1,0 +1,10 @@
+<Files config.ini>
+    order deny,allow
+    Deny from all
+</Files>
+
+# DB Config
+SetEnv DBHOST ""
+SetEnv DBNAME ""
+SetEnv DBUSER ""
+SetEnv DBPASSWD ""
