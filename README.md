@@ -34,7 +34,8 @@ Die Daten für die Datenbankverbindung können in der config.php im includes-Ver
 ## Datenbank
 Die Datenbankverbindung wurde, wie gewünscht, mittels PDO realisiert.   
 Hierfür existiert, in Verbindung mit der config.php, in der die Konfigurationen für die Datenbank liegen, die database.php.   
-Die darin definierte Klasse kümmert sich um die Verbindung zur Datenbank.
+Diese liest über getenv die in der htaccess definierten Daten aus, alternativ können diese auch über die config.ini im Root definiert werden.
+Die config.ini wird über die htaccess von Aufrufen im Browser geschützt.
 
 ## Artikel
 Hier werden alle Methoden, die die Artikel betreffen, definiert.
