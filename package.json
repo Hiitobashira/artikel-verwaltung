@@ -1,7 +1,6 @@
 {
     "dependencies": {
         "concurrently": "^8.2.1",
-        "echarts": "^5.4.3",
         "node-sass": "^9.0.0"
     },
     "scripts": {
